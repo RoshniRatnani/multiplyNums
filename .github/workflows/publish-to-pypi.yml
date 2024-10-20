@@ -1,4 +1,4 @@
-name: multiplyNums
+name: Publish Python Package
 
 on:
   push:
@@ -22,13 +22,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install setuptools wheel twine
 
-    - name: multiplyNums
+    - name: Build Package
       run: |
         python setup.py sdist bdist_wheel
 
-    - name: multiplyNums
+    - name: Upload to PyPI
       env:
-        TWINE_USERNAME: RoshniRatnani
-        TWINE_PASSWORD: Roshni@1205
+        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
       run: |
         twine upload dist/*
